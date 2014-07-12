@@ -1,0 +1,67 @@
+= Gurobi
+
+This is a Gurobi Ruby binding based on C++ Gurobi API.
+
+== Prerequisites
+
+* Gurobi 5.5 installed and
+  environment variable GUROBI_HOME is set (e.g. /opt/gurobi550/linux64).
+
+== Installation
+
+This package has not yet been registered at gem site so that
+please do as follows:
+
+1. download or 'git clone'
+1. rake build
+1. install it
+
+== Usage
+
+Following model:
+
+        x1, x2, x3 >=  0
+                x3 <= 30
+  2*x1 +   x2 + x3 <= 60
+    x1 + 2*x2 + x3 <= 60
+  maximize 15*x1 + 18*x2 + 30*x3
+
+is written in following ruby code:
+
+  require 'gurobi'
+  
+  model = Gurobi::Model.new(Gurobi::Env.new)
+  x1    = model.addVar(0, Gurobi::INFINITY, 0, Gurobi::CONTINUOUS, 'x1')
+  x2    = model.addVar(0, Gurobi::INFINITY, 0, Gurobi::CONTINUOUS, 'x2')
+  x3    = model.addVar(0, 30,               0, Gurobi::CONTINUOUS, 'x3')
+  model.update
+  model.addConstr(2*x1 +   x2 + x3 <= 60)
+  model.addConstr(  x1 + 2*x2 + x3 <= 60)
+  model.setObjective(15*x1 + 18*x2 + 30*x3, Gurobi::MAXIMIZE)
+  model.optimize
+  print "val = ", model.get_double(Gurobi::DoubleAttr::OBJ_VAL), "\n"
+  print "x1  = ", x1.get_double(Gurobi::DoubleAttr::X), "\n"
+  print "x2  = ", x2.get_double(Gurobi::DoubleAttr::X), "\n"
+  print "x3  = ", x3.get_double(Gurobi::DoubleAttr::X), "\n"
+
+See {spec/}[../spec/] and {sample/}[../sample/] for more examples.
+
+== Document
+
+1. generate document by:
+    $ rake yard
+1. browse doc/frames.html
+
+== TODO
+
+* Some known memory leak exist.
+* Client/Server model is not implemented.
+
+
+== Contributing
+
+1. Fork it ( https://github.com/[my-github-username]/gurobi/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
