@@ -12,7 +12,7 @@
 describe 'Feasopt' do
   it 'works' do
     env = Gurobi::Env.new
-    feasmodel = Gurobi::Model.new(env, 'spec/data/klein1.mps')
+    feasmodel = Gurobi::Model.new(env, model_file('klein1.mps'))
 
     # Create a copy to use FeasRelax feature later
     feasmodel1 = Gurobi::Model.new(feasmodel)

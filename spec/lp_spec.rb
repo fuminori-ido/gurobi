@@ -9,7 +9,7 @@
 describe 'Lp' do
   it 'works' do
     env = Gurobi::Env.new
-    model = Gurobi::Model.new(env, 'spec/data/klein1.mps')
+    model = Gurobi::Model.new(env, model_file('klein1.mps'))
 
     model.optimize
 

@@ -20,7 +20,7 @@ describe 'Fixanddive' do
     # Read model
     env = Gurobi::Env.new
     Gurobi::Model 
-    model = Gurobi::Model.new(env, 'spec/data/stein9.mps')
+    model = Gurobi::Model.new(env, model_file('stein9.mps'))
 
     # Collect integer variables and relax them
     # Note that we use Gurobi::Var* to copy variables

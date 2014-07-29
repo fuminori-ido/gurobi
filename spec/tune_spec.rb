@@ -10,7 +10,7 @@ describe 'Tune' do
 
     # Read model from file
 
-    model = Gurobi::Model.new(env, 'spec/data/p0033.mps')
+    model = Gurobi::Model.new(env, model_file('p0033.mps'))
 
     menv = model.getEnv
 

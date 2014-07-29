@@ -8,7 +8,7 @@
 describe 'Mip2' do
   it 'works' do
     env = Gurobi::Env.new
-    model = Gurobi::Model.new(env, 'spec/data/stein9.mps')
+    model = Gurobi::Model.new(env, model_file('stein9.mps'))
 
     if model.get_int(Gurobi::IntAttr::IS_MIP) == 0
       raise Gurobi::Exception("Model is not a MIP")

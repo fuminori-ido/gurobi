@@ -22,7 +22,7 @@ describe 'Params' do
   it 'works' do
     # Read model and verify that it is a MIP
     env = Gurobi::Env.new
-    base = Gurobi::Model.new(env, 'spec/data/misc07.mps')
+    base = Gurobi::Model.new(env, model_file('misc07.mps'))
     base.get_int(Gurobi::IntAttr::IS_MIP).should_not == 0
 
     # Set a 5 second time limit

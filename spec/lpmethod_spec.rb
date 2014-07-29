@@ -7,7 +7,7 @@ describe 'Lpmethod' do
   it 'works' do
     # Read model
     env = Gurobi::Env.new
-    m = Gurobi::Model.new(env, 'spec/data/afiro.mps')
+    m = Gurobi::Model.new(env, model_file('afiro.mps'))
     menv = m.getEnv
 
     # Solve the model with different values of Method

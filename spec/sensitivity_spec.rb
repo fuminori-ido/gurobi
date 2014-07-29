@@ -8,7 +8,7 @@ describe 'Sensitivity' do
   it 'works' do
     # Read model
     env = Gurobi::Env.new
-    a = Gurobi::Model.new(env, 'spec/data/p0033.lp')
+    a = Gurobi::Model.new(env, model_file('p0033.lp'))
     a.optimize
     a.getEnv.set_int(Gurobi::IntParam::OUTPUT_FLAG, 0)
 

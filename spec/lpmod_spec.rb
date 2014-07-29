@@ -11,7 +11,7 @@ describe 'Lpmod' do
   it 'works' do
     # Read model and determine whether it is an LP
     env = Gurobi::Env.new
-    model = Gurobi::Model.new(env, 'spec/data/afiro.mps')
+    model = Gurobi::Model.new(env, model_file('afiro.mps'))
     if model.get_int(Gurobi::IntAttr::IS_MIP) != 0
       print "The model is not a linear program\n"
       return 1
