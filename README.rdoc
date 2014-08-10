@@ -4,8 +4,9 @@ This is a Gurobi Ruby binding based on C++ Gurobi API.
 
 == Prerequisites
 
-* Gurobi 5.5 installed and
-  environment variable GUROBI_HOME is set (e.g. /opt/gurobi550/linux64).
+* C++(g++) is installed.
+* Gurobi 5.5 is installed.
+* Environment variable GUROBI_HOME is set (e.g. /opt/gurobi550/linux64).
 
 == Installation
 
@@ -66,7 +67,7 @@ See {spec/}[../spec/] and {sample/}[../sample/] for more examples.
 
 == Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/gurobi/fork )
+1. Fork it ( https://github.com/fuminori-ido/gurobi/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
