@@ -88,6 +88,7 @@ VALUE         gurobi_wrap_sos(const GRBSOS&);
 /* Utility */
 VALUE     gurobi_sym(const char *);
 VALUE     gurobi_sym2(ID);
+bool      float_or_bignum(VALUE);
 
 #define method_cast(method)   reinterpret_cast<VALUE(*)(...)>(method)
 

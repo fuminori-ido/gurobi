@@ -133,7 +133,7 @@ var_mul(VALUE self, VALUE rhs)
 
   if( TYPE(rhs) == T_FIXNUM ){
     return gurobi_wrap_lin_expr(*p * FIX2INT(rhs));
-  }else if( TYPE(rhs) == T_FLOAT ){
+  }else if( float_or_bignum(rhs) ){
     return gurobi_wrap_lin_expr(*p * NUM2DBL(rhs));
   }else if( rhs_class == rb_cGurobiVar ){
     return gurobi_wrap_quad_expr(*p * *gurobi_var_get(rhs));
@@ -158,7 +158,7 @@ var_add(VALUE self, VALUE rhs)
 
   if( TYPE(rhs) == T_FIXNUM ){
     return gurobi_wrap_lin_expr(*p + FIX2INT(rhs));
-  }else if( TYPE(rhs) == T_FLOAT ){
+  }else if( float_or_bignum(rhs) ){
     return gurobi_wrap_lin_expr(*p + NUM2DBL(rhs));
   }else if( rhs_class == rb_cGurobiVar ){
     return gurobi_wrap_lin_expr(*p + *gurobi_var_get(rhs));

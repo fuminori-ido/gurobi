@@ -44,6 +44,7 @@ lin_expr_alloc(VALUE klass)
 
 * LinExpr()
 * LinExpr(Fixnum)
+* LinExpr(Bignum)
 * LinExpr(Float)
 * LinExpr(LinExpr)
 * LinExpr(Var, double = 1.0)
@@ -62,7 +63,7 @@ lin_expr_init(int argc, VALUE* argv, VALUE self)
       *p = *gurobi_lin_expr_get(argv[0]);
     }else if( TYPE(argv[0]) == T_FIXNUM ){
       new(p) GRBLinExpr(NUM2INT(argv[0]));
-    }else if( TYPE(argv[0]) == T_FLOAT ){
+    }else if( float_or_bignum(argv[0]) ){
       new(p) GRBLinExpr(NUM2DBL(argv[0]));
     }else if( CLASS_OF(argv[0]) == rb_cGurobiVar ){
       new(p) GRBLinExpr(*gurobi_var_get(argv[0]));
@@ -93,6 +94,7 @@ lin_expr_add_term(VALUE self, VALUE coeff, VALUE var)
     _coeff = FIX2INT(coeff);
     break;
   case T_FLOAT:
+  case T_BIGNUM:
     _coeff = NUM2DBL(coeff);
     break;
   default:
@@ -218,7 +220,7 @@ lin_expr_le(VALUE self, VALUE rhs)
     return gurobi_wrap_temp_constr(*p <= *gurobi_lin_expr_get(rhs));
   }else if( TYPE(rhs) == T_FIXNUM ){
     return gurobi_wrap_temp_constr(*p <= FIX2INT(rhs));
-  }else if( TYPE(rhs) == T_FLOAT ){
+  }else if( float_or_bignum(rhs) ){
     return gurobi_wrap_temp_constr(*p <= NUM2DBL(rhs));
   }else{
     rb_raise(rb_eStandardError, "unknown rhs type in Gurobi::LinExpr#<=");
@@ -238,7 +240,7 @@ lin_expr_ge(VALUE self, VALUE rhs)
     return gurobi_wrap_temp_constr(*p >= *gurobi_lin_expr_get(rhs));
   }else if( TYPE(rhs) == T_FIXNUM ){
     return gurobi_wrap_temp_constr(*p >= FIX2INT(rhs));
-  }else if( TYPE(rhs) == T_FLOAT ){
+  }else if( float_or_bignum(rhs) ){
     return gurobi_wrap_temp_constr(*p >= NUM2DBL(rhs));
   }else{
     rb_raise(rb_eStandardError, "unknown rhs type in Gurobi::LinExpr#>=");
@@ -248,6 +250,7 @@ lin_expr_ge(VALUE self, VALUE rhs)
 /*!
 TempConstr opeartor==(LinExpr)
 TempConstr opeartor==(Fixnum)
+TempConstr opeartor==(Bignum)
 TempConstr opeartor==(Float)
 TempConstr opeartor==(Var)
 */
@@ -261,7 +264,7 @@ lin_expr_eq(VALUE self, VALUE rhs)
     return gurobi_wrap_temp_constr(*p == *gurobi_lin_expr_get(rhs));
   }else if( TYPE(rhs) == T_FIXNUM ){
     return gurobi_wrap_temp_constr(*p == FIX2INT(rhs));
-  }else if( TYPE(rhs) == T_FLOAT ){
+  }else if( float_or_bignum(rhs) ){
     return gurobi_wrap_temp_constr(*p == NUM2DBL(rhs));
   }else if( rhs_class == rb_cGurobiVar ){
     return gurobi_wrap_temp_constr(*p == *gurobi_var_get(rhs));
