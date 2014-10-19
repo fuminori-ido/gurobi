@@ -11,7 +11,7 @@ This is a Gurobi Ruby binding based on C++ Gurobi API.
 == Installation
 
 * From rubygems.org
-  $ gem install gurobi
+    $ gem install gurobi
 * From github
   1. download or 'git clone' like this:
       $ mkdir [YOUR_WORK_DIR]
