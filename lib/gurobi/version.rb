@@ -1,3 +1,3 @@
 module Gurobi
-  VERSION = "0.00.01"
+  VERSION = "0.00.02"
 end

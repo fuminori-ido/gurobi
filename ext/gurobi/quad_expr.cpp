@@ -227,7 +227,7 @@ quad_expr_eq(VALUE self, VALUE rhs)
   }else if( TYPE(rhs) == T_FIXNUM ){
     double          _rhs    = FIX2INT(rhs);
     result  = *p == _rhs;
-  }else if( TYPE(rhs) == T_FLOAT ){
+  }else if( float_or_bignum(rhs) ){
     double          _rhs    = NUM2DBL(rhs);
     result  = *p == _rhs;
   }else{

@@ -352,6 +352,15 @@ gurobi_sym2(ID sym)
   return ID2SYM(sym);
 }
 
+bool
+float_or_bignum(VALUE val)
+{
+  return(
+      TYPE(val) == T_FLOAT ||
+      TYPE(val) == T_BIGNUM
+  );
+}
+
 extern "C" void
 Init_gurobi()
 {
